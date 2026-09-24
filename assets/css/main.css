@@ -298,7 +298,7 @@ main:focus { outline: none; }
 .brand { display: inline-flex; align-items: center; margin-right: auto; }
 .brand__img { height: 44px; width: auto; }
 .brand__lockup { display: inline-flex; align-items: center; gap: 12px; }
-.brand__mark { width: 32px; height: auto; }
+.brand__mark { width: 40px; height: auto; }
 .brand__type { display: grid; line-height: 1; }
 .brand__name {
   font-family: var(--f-display);
@@ -315,7 +315,7 @@ main:focus { outline: none; }
   opacity: 0.8;
 }
 @media (min-width: 1100px) {
-  .brand__mark { width: 38px; }
+  .brand__mark { width: 48px; }
   .brand__name { font-size: 1.5rem; }
 }
 
@@ -1269,7 +1269,7 @@ main:focus { outline: none; }
 @media (min-width: 1100px) { .site-footer__grid { grid-template-columns: 5fr 2fr 3fr 4fr; } }
 .site-footer__brand { display: grid; gap: 20px; justify-items: start; }
 .site-footer__brand p { color: var(--concrete); max-width: 38ch; }
-.brand--footer .brand__mark { width: 56px; }
+.brand--footer .brand__mark { width: 76px; }
 .brand--footer .brand__name { font-size: 2rem; }
 .site-footer__col h2 { color: var(--concrete); margin-bottom: 18px; }
 .site-footer__col ul { display: grid; gap: 10px; }

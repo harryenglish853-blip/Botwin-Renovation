@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const config = require('./site.config');
 const scenes = require('./scripts/scenes');
+const LOGO = require('./scripts/logo');
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
@@ -55,10 +56,7 @@ const categories = [
 
 // ----------------------------------------------------------------- icons
 const ARROW = `<svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12h16M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></svg>`;
-const MARK_PATH =
-  'M0 0H84L104 20V46L94 56L110 72V100L90 120H0Z M24 22H74L80 28V40L74 46H24Z M24 68H80L86 74V92L80 98H24Z';
-const mark = (cls = '') =>
-  `<svg class="mark ${cls}" viewBox="0 0 110 120" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="${MARK_PATH}"/></svg>`;
+const mark = (cls = '') => LOGO.svg({ attrs: `class="mark ${cls}" aria-hidden="true" focusable="false"` });
 const ICONS = {
   phone: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
   mail: '<path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/>',
@@ -1124,8 +1122,8 @@ function buildMeta() {
     'site.webmanifest',
     JSON.stringify({ name: company.legalName, short_name: company.shortName, icons: [{ src: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }, { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' }], theme_color: '#050505', background_color: '#050505', display: 'standalone', start_url: '/' }, null, 2)
   );
-  write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -20 160 160"><rect x="-25" y="-20" width="160" height="160" fill="#050505"/><path fill="#F5F4F0" fill-rule="evenodd" d="${MARK_PATH}"/></svg>`);
-  write('assets/img/logo-mark.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 120"><path fill="#050505" fill-rule="evenodd" d="${MARK_PATH}"/></svg>`);
+  write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${LOGO.SQUARE_VIEWBOX}"><rect x="-20" y="20" width="1000" height="1000" fill="#050505"/><path fill="#F5F4F0" fill-rule="evenodd" d="${LOGO.PATH}"/></svg>`);
+  write('assets/img/logo-mark.svg', LOGO.svg({ fill: '#050505', attrs: 'xmlns="http://www.w3.org/2000/svg"' }));
 }
 
 // ================================================================== MAIN
@@ -1158,9 +1156,8 @@ function main() {
   const todos = src.map((l, i) => [i + 1, l]).filter(([, l]) => /\/\/\s*TODO\(confirm\)/.test(l));
   const nulls = Object.entries(credentials).filter(([, v]) => v == null).map(([k]) => k);
   console.log(`\n✔ Built ${sitemap.length} indexable pages → dist/`);
-  if (todos.length || nulls.length || company.logoIsPlaceholder) {
+  if (todos.length || nulls.length) {
     console.log('\n⚠ Before launch, confirm these placeholders in site.config.js:');
-    if (company.logoIsPlaceholder) console.log('  • company.logoSrc — official logo not yet supplied (using stand-in mark)');
     for (const [n, l] of todos) console.log(`  • line ${n}: ${l.trim().replace(/\s*\/\/\s*TODO\(confirm\)\s*/, ' — confirm ')}`);
     if (nulls.length) console.log(`  • credentials still null (shown as "To be confirmed"): ${nulls.join(', ')}`);
     if (!reviews.length) console.log('  • reviews: none added yet (honest empty state is shown)');

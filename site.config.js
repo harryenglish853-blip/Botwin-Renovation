@@ -22,10 +22,10 @@ module.exports = {
     tagline: 'Transforming spaces. Built to last.',
     // Production URL, no trailing slash. Used for canonical URLs, sitemap, OG.
     siteUrl: 'https://www.botwinrenovations.com', // TODO(confirm) real domain
-    // Replace with the official logo file (SVG preferred) placed in /assets/img/.
-    // While null, the built-in geometric "B" mark + wordmark is used.
-    logoSrc: null, // e.g. '/assets/img/botwin-logo.svg'
-    logoIsPlaceholder: true, // set to false once the official logo is supplied
+    // The official "BR" logo is built in as vector artwork (scripts/logo.js),
+    // traced from brand/botwin-logo-original.jpg. Set logoSrc only to use a
+    // different image file instead, e.g. '/assets/img/botwin-logo.svg'.
+    logoSrc: null,
   },
 
   // ---------------------------------------------------------------

@@ -12,17 +12,17 @@ const { chromium } = require('playwright');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const BASE = process.env.BASE || 'http://localhost:4173';
-const MARK = 'M0 0H84L104 20V46L94 56L110 72V100L90 120H0Z M24 22H74L80 28V40L74 46H24Z M24 68H80L86 74V92L80 98H24Z';
+const LOGO = require('./logo');
 
 const icon = (size, pad) => `<body style="margin:0;background:#050505;width:${size}px;height:${size}px;display:grid;place-items:center">
-<svg viewBox="0 0 110 120" style="height:${size - pad * 2}px"><path fill="#F5F4F0" fill-rule="evenodd" d="${MARK}"/></svg></body>`;
+${LOGO.svg({ fill: '#F5F4F0', attrs: `style="width:${size - pad * 2}px"` })}</body>`;
 
 const og = `<!doctype html><html><head><link rel="stylesheet" href="${BASE}/assets/css/main.css"></head>
 <body style="margin:0;width:1200px;height:630px;background:#050505;color:#F5F4F0;overflow:hidden;position:relative">
   <img src="${BASE}/assets/img/scenes/kitchen-after.svg" style="position:absolute;right:0;top:0;width:640px;height:630px;object-fit:cover;clip-path:polygon(0 0,calc(100% - 60px) 0,100% 60px,100% 100%,0 100%)">
   <div style="position:absolute;right:0;top:0;width:640px;height:630px;background:linear-gradient(90deg,#050505 0%,rgba(5,5,5,0) 40%)"></div>
   <div style="position:absolute;left:64px;top:64px;bottom:64px;width:620px;display:flex;flex-direction:column;justify-content:space-between">
-    <span class="brand__lockup" style="gap:16px"><svg viewBox="0 0 110 120" style="width:56px"><path fill="#F5F4F0" fill-rule="evenodd" d="${MARK}"/></svg>
+    <span class="brand__lockup" style="gap:16px">${LOGO.svg({ fill: '#F5F4F0', attrs: 'style="width:64px"' })}
       <span class="brand__type"><span class="brand__name" style="font-size:2.1rem">BOTWIN</span><span class="brand__sub" style="font-size:.8rem">RENOVATIONS</span></span></span>
     <div>
       <div class="display" style="font-size:5.4rem;font-stretch:76%;line-height:.86">TRANSFORMING<br>SPACES.<br><span style="color:transparent;-webkit-text-stroke:2px #F5F4F0">BUILT TO LAST.</span></div>
@@ -44,9 +44,9 @@ const og = `<!doctype html><html><head><link rel="stylesheet" href="${BASE}/asse
     await p.screenshot({ path: path.join(ROOT, out), omitBackground: false });
     console.log('✔', out);
   };
-  await shot(icon(32, 4), 32, 32, 'static/favicon-32.png');
-  await shot(icon(180, 30), 180, 180, 'static/apple-touch-icon.png');
-  await shot(icon(512, 80), 512, 512, 'assets/img/logo-mark.png');
+  await shot(icon(32, 2), 32, 32, 'static/favicon-32.png');
+  await shot(icon(180, 24), 180, 180, 'static/apple-touch-icon.png');
+  await shot(icon(512, 64), 512, 512, 'assets/img/logo-mark.png');
   await shot(og, 1200, 630, 'assets/img/og-image.png');
   await b.close();
 })();

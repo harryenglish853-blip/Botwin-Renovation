@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Botwin Renovations — Website Draft for Review</title>
+<!-- Template for the client review PDF. Rendered by scripts/build-deck.js;
+     {{LOGO}} and {{DATE}} are filled in at build time, shots/ is captured fresh. -->
+<style>
+@font-face { font-family: 'Archivo'; src: url('/assets/fonts/archivo-latin.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; }
+@font-face { font-family: 'Manrope'; src: url('/assets/fonts/manrope-latin.woff2') format('woff2'); font-weight: 200 800; }
+@font-face { font-family: 'Plex'; src: url('/assets/fonts/plexmono-500-latin.woff2') format('woff2'); font-weight: 500; }
+@page { size: 11in 8.5in; margin: 0; }
+:root { --jet:#050505; --off:#F5F4F0; --tint:#EBE9E3; --concrete:#A5A5A5; --steel:#5C5D59; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Manrope, sans-serif; color: var(--jet); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 11in; height: 8.5in; position: relative; overflow: hidden; background: var(--off); padding: .55in .6in .5in; page-break-after: always; display: flex; flex-direction: column; }
+.page.dark { background: var(--jet); color: var(--off); }
+.mono { font-family: Plex, monospace; font-size: 8pt; letter-spacing: .14em; text-transform: uppercase; }
+.display { font-family: Archivo; font-weight: 900; font-stretch: 84%; text-transform: uppercase; line-height: .9; letter-spacing: -.01em; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: .4in; padding-bottom: .16in; margin-bottom: .22in; border-bottom: 5px solid currentColor; }
+.head h2 { font-size: 30pt; }
+.head .idx { color: var(--steel); display: block; margin-bottom: .08in; }
+.dark .head .idx { color: var(--concrete); }
+.head p { font-size: 9.5pt; line-height: 1.45; max-width: 4.3in; color: #333; }
+.dark .head p { color: #c9c8c3; }
+.foot { position: absolute; left: .6in; right: .6in; bottom: .22in; display: flex; justify-content: space-between; color: var(--steel); }
+.dark .foot { color: #777; }
+.body { flex: 1; min-height: 0; display: grid; gap: .22in; align-content: start; align-items: start; }
+.shot { width: 100%; max-height: 5.2in; background-size: 100% auto; background-position: top center; background-repeat: no-repeat; box-shadow: 0 0 0 1px rgba(0,0,0,.12); position: relative; }
+.dark .shot { box-shadow: 0 0 0 1px rgba(255,255,255,.14); }
+.cap { margin-top: .08in; display: flex; justify-content: space-between; gap: .2in; }
+.cap b { font-family: Archivo; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: 8.5pt; }
+.cap span { font-size: 8pt; color: var(--steel); text-align: right; }
+.dark .cap span { color: var(--concrete); }
+figure { display: flex; flex-direction: column; min-height: 0; }
+.chamfer { clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%); }
+.cover { padding: .7in; justify-content: space-between; }
+.cover h1 { font-size: 78pt; line-height: .84; font-stretch: 74%; }
+.cover h1 .o { color: transparent; -webkit-text-stroke: 1.6px var(--off); }
+.cover .meta { display: grid; grid-template-columns: repeat(3, auto); gap: .5in; justify-content: start; border-top: 1px solid rgba(255,255,255,.2); padding-top: .2in; }
+.cover .meta div span { display: block; color: var(--concrete); margin-bottom: .05in; }
+.cover .meta div b { font-family: Archivo; font-weight: 700; font-size: 11pt; letter-spacing: .03em; }
+.cover .bigmark svg { position: absolute; right: -1.4in; bottom: -1.1in; width: 8.6in; opacity: .06; }
+.cover .brand { display: flex; align-items: center; gap: .18in; }
+.cover .brand svg { width: .8in; }
+.cover .brand b { font-family: Archivo; font-weight: 900; font-stretch: 112%; font-size: 20pt; letter-spacing: .04em; display: block; line-height: 1; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: .45in; }
+.lead { font-size: 13pt; line-height: 1.5; font-weight: 500; }
+.txt p { font-size: 10pt; line-height: 1.6; margin-bottom: .12in; }
+.list { list-style: none; border-top: 4px solid var(--jet); }
+.list li { display: grid; grid-template-columns: .38in 1fr; padding: .1in 0; border-bottom: 1px solid rgba(0,0,0,.14); font-size: 9.5pt; line-height: 1.45; }
+.list li .mono { color: var(--steel); padding-top: 2px; }
+.list li b { font-family: Archivo; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; display: block; font-size: 10pt; }
+.pages { columns: 2; column-gap: .3in; font-size: 9pt; line-height: 1.75; list-style: none; }
+.pages li::before { content: '—  '; color: var(--steel); }
+.pages li b { font-family: Archivo; font-weight: 700; }
+.check { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: .4in; border-top: 4px solid var(--jet); }
+.check li { display: grid; grid-template-columns: .22in 1.35in 1fr; gap: .08in; align-items: start; padding: .085in 0; border-bottom: 1px solid rgba(0,0,0,.14); font-size: 8.8pt; line-height: 1.4; }
+.check .box { width: .14in; height: .14in; border: 1.5px solid var(--jet); margin-top: 2px; }
+.check b { font-family: Archivo; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 8.8pt; }
+.check em { font-style: normal; color: var(--steel); }
+.check .line { border-bottom: 1px dashed #999; height: .18in; margin-top: .02in; }
+.tag { display: inline-block; font-family: Plex; font-size: 6.5pt; letter-spacing: .12em; text-transform: uppercase; padding: 1px 5px; background: var(--jet); color: var(--off); margin-left: 4px; vertical-align: 1px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25in; }
+.steps div { border-top: 5px solid var(--off); padding-top: .15in; }
+.steps .n { font-family: Archivo; font-weight: 900; font-stretch: 80%; font-size: 34pt; color: transparent; -webkit-text-stroke: 1.2px var(--off); line-height: 1; }
+.steps b { display: block; font-family: Archivo; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; margin: .1in 0 .06in; font-size: 11pt; }
+.steps p { font-size: 9.5pt; line-height: 1.5; color: #c9c8c3; }
+.note { font-size: 9pt; line-height: 1.5; color: #c9c8c3; }
+.note .mono { color: var(--off); }
+.phone { aspect-ratio: 390/844; border-radius: 14px; box-shadow: 0 0 0 5px #2a2a2a; }
+</style>
+</head>
+<body>
+
+<section class="page dark cover">
+  <div class="bigmark">{{LOGO}}</div>
+  <div class="brand">{{LOGO}}<div><b>BOTWIN</b><span class="mono" style="color:var(--concrete);letter-spacing:.42em;font-size:7pt">Renovations</span></div></div>
+  <div>
+    <p class="mono" style="color:var(--concrete);margin-bottom:.25in">Website draft · For your review</p>
+    <h1 class="display">Your new<br>website.<br><span class="o">First look.</span></h1>
+  </div>
+  <div class="meta">
+    <div><span class="mono">Prepared for</span><b>Botwin Renovations LLC</b></div>
+    <div><span class="mono">Version</span><b>Draft 1</b></div>
+    <div><span class="mono">Date</span><b>{{DATE}}</b></div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">01 — Overview</span><h2 class="display">What you’re<br>looking at.</h2></div>
+    <p>This is a working draft. The design, layout, features and page structure are all built and working. Several details are still waiting on information from you.</p></div>
+  <div class="body cols">
+    <div class="txt">
+      <p class="lead" style="margin-bottom:.18in">A premium, architectural website built around the Botwin BR mark: bold black geometry, clean off-white space, and a clear story of transformation.</p>
+      <p>The site opens with a full-screen scene that transforms as visitors scroll: raw framing → construction → finished space. From there it walks through before &amp; after comparisons, services, selected projects, your process and a simple consultation request form.</p>
+      <p style="margin-top:.2in"><span class="mono">Three things to know as you review</span></p>
+      <ul class="list" style="margin-top:.08in">
+        <li><span class="mono">01</span><div><b>The images are placeholders</b>The black-and-white room drawings are illustrations and are labelled that way on the site. They will be replaced with photos of your real projects.</div></li>
+        <li><span class="mono">02</span><div><b>“To be confirmed” = we need your info</b>We never publish unverified numbers, licenses or reviews. Anything grey or dashed is waiting on you (see the checklist at the end).</div></li>
+        <li><span class="mono">03</span><div><b>Your logo is built in</b>The BR mark has been redrawn as sharp vector artwork from your logo file, so it stays crisp at every size, from the phone tab icon to the footer.</div></li>
+      </ul>
+    </div>
+    <div class="txt">
+      <p><span class="mono">What’s included · 25 pages</span></p>
+      <ul class="pages" style="margin-top:.12in">
+        <li><b>Home page</b> with 10 sections</li>
+        <li><b>10 service pages</b> (kitchens, baths, full home…)</li>
+        <li><b>Project portfolio</b> with filters</li>
+        <li><b>5 project case studies</b></li>
+        <li><b>Nashville service-area page</b></li>
+        <li><b>3 local pages</b> for Google search</li>
+        <li><b>Contact / quote form</b> with photo upload</li>
+        <li><b>Privacy policy &amp; terms</b></li>
+        <li><b>Thank-you &amp; 404 pages</b></li>
+      </ul>
+      <p style="margin-top:.28in"><span class="mono">Built in</span></p>
+      <ul class="list" style="margin-top:.08in">
+        <li><span class="mono">✓</span><div>Works on every phone, tablet and desktop size</div></li>
+        <li><span class="mono">✓</span><div>Fast-loading: under 2.5s on a mid-range phone</div></li>
+        <li><span class="mono">✓</span><div>Local search setup for Nashville (Google-ready pages, sitemap, business info)</div></li>
+        <li><span class="mono">✓</span><div>Accessible: keyboard-friendly, screen-reader labels, strong contrast</div></li>
+        <li><span class="mono">✓</span><div>Quote requests arrive with name, phone, email, project details, timestamp and photos</div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>02</span></div>
+</section>
+
+<section class="page dark">
+  <div class="head"><div><span class="mono idx">02 — Home · Opening scene</span><h2 class="display">From what it was<br>to what it can be.</h2></div>
+    <p>The first thing visitors see. As they scroll, the room transforms in three stages, showing what Botwin does before a single word is read.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 2.55in;">
+    <figure><div class="shot chamfer" style="background-image:url(shots/hero-wipe.jpg);aspect-ratio:16/10"></div><div class="cap"><b>Mid-scroll</b><span>The construction stage sweeps across the raw framing</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.22in;margin-top:.22in">
+        <p class="note"><span class="mono">Headline</span><br>“Transforming spaces. Built to last.”</p>
+        <p class="note"><span class="mono">Main buttons</span><br>“Start your project” → quote form<br>“View our work” → portfolio</p>
+        <p class="note"><span class="mono">Navigation</span><br>Home · Services · Projects · About · Process · Reviews · Contact · <b style="color:var(--off)">Get a quote</b></p>
+      </div>
+    </figure>
+    <div style="display:grid;gap:.16in">
+      <figure><div class="shot" style="background-image:url(shots/hero-0.jpg);aspect-ratio:16/10"></div><div class="cap"><b>01 Before</b><span>Raw structure</span></div></figure>
+      <figure><div class="shot" style="background-image:url(shots/hero-1.jpg);aspect-ratio:16/10"></div><div class="cap"><b>02 Process</b><span>Under construction</span></div></figure>
+      <figure><div class="shot" style="background-image:url(shots/hero-2.jpg);aspect-ratio:16/10"></div><div class="cap"><b>03 After</b><span>Finished space</span></div></figure>
+    </div>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>03</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">03 — Home · Sections 1–2</span><h2 class="display">Let the work<br>sell itself.</h2></div>
+    <p>A bold brand statement, then interactive before &amp; after sliders. Visitors drag the handle to reveal each transformation, organised by project type.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 1.25fr;">
+    <figure><div class="shot" data-shot="d-statement"></div><div class="cap"><b>Brand statement</b><span>“We don’t just renovate spaces.”</span></div></figure>
+    <figure><div class="shot" data-shot="d-transformations"></div><div class="cap"><b>Before &amp; after sliders</b><span>Kitchen · Bath · Full home · Interior · Exterior</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>04</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">04 — Home · Sections 3–4</span><h2 class="display">What we build.<br>Selected work.</h2></div>
+    <p>Every service links to its own page. The portfolio uses large, magazine-style layouts with filters, and each project opens a full case study.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 1fr;">
+    <figure><div class="shot" data-shot="d-services"></div><div class="cap"><b>Services</b><span>10 services · please confirm which you offer</span></div></figure>
+    <figure><div class="shot" data-shot="d-projects"></div><div class="cap"><b>Project portfolio</b><span>Filter: kitchens, baths, interiors, exteriors, full</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>05</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">05 — Home · Sections 5–6</span><h2 class="display">Trust &amp;<br>process.</h2></div>
+    <p>Your company story alongside a spec sheet of verified details, then a six-step timeline that animates as visitors scroll, from consultation to final walkthrough.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 1fr;">
+    <figure><div class="shot" data-shot="d-about"></div><div class="cap"><b>Craftsmanship without compromise</b><span>Stats show “To be confirmed” until provided</span></div></figure>
+    <figure><div class="shot" data-shot="d-process"></div><div class="cap"><b>From idea to finished space</b><span>6-step process</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>06</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">06 — Home · Sections 7–8</span><h2 class="display">Built different.<br>Client reviews.</h2></div>
+    <p>Seven reasons to choose Botwin (please confirm each fits how you work), then a reviews section that only shows genuine, verified reviews.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 1fr;">
+    <figure><div class="shot" data-shot="d-why"></div><div class="cap"><b>Why choose Botwin</b><span>Please review the wording</span></div></figure>
+    <figure><div class="shot" data-shot="d-reviews"></div><div class="cap"><b>Reviews</b><span>Shows an honest “coming soon” until real reviews are added</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>07</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">07 — Home · Sections 9–10</span><h2 class="display">Where we work.<br>Get in touch.</h2></div>
+    <p>A custom map of Nashville and surrounding communities, followed by the consultation request form: phone, email, project type, budget, timing and photos.</p></div>
+  <div class="body" style="grid-template-columns: 1fr 1fr;">
+    <figure><div class="shot" data-shot="d-service-area"></div><div class="cap"><b>Service area</b><span>Please confirm the cities you serve</span></div></figure>
+    <figure><div class="shot" data-shot="d-contact"></div><div class="cap"><b>Quote request form</b><span>Phone &amp; email are placeholders</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>08</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">08 — Inner pages</span><h2 class="display">Beyond the<br>home page.</h2></div>
+    <p>Each service and project has its own page with its own before &amp; after comparison. Local pages help Botwin appear in Nashville search results.</p></div>
+  <div class="body" style="grid-template-columns: repeat(3, 1fr);">
+    <figure><div class="shot" data-shot="p-service"></div><div class="cap"><b>Service page</b><span>Kitchen Remodeling</span></div></figure>
+    <figure><div class="shot" data-shot="p-case"></div><div class="cap"><b>Project case study</b><span>Challenge → Plan → Build → Result</span></div></figure>
+    <figure><div class="shot" data-shot="p-area"></div><div class="cap"><b>Local page</b><span>Renovation in Nashville, TN</span></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>09</span></div>
+</section>
+
+<section class="page dark">
+  <div class="head"><div><span class="mono idx">09 — Mobile</span><h2 class="display">Designed for<br>the phone first.</h2></div>
+    <p>Most visitors will arrive on a phone. Sliders work with a swipe, the form is quick to fill in with one thumb, and the menu opens full-screen.</p></div>
+  <div class="body" style="grid-template-columns: repeat(5, 1fr); gap: .24in;">
+    <figure><div class="shot phone" style="background-image:url(shots/ph-hero.jpg)"></div><div class="cap" style="margin-top:.14in"><b>Opening scene</b></div></figure>
+    <figure><div class="shot phone" style="background-image:url(shots/ph-slider.jpg)"></div><div class="cap" style="margin-top:.14in"><b>Before / after</b></div></figure>
+    <figure><div class="shot phone" style="background-image:url(shots/ph-projects.jpg)"></div><div class="cap" style="margin-top:.14in"><b>Projects</b></div></figure>
+    <figure><div class="shot phone" style="background-image:url(shots/ph-form.jpg)"></div><div class="cap" style="margin-top:.14in"><b>Quote form</b></div></figure>
+    <figure><div class="shot phone" style="background-image:url(shots/ph-menu.jpg)"></div><div class="cap" style="margin-top:.14in"><b>Menu</b></div></figure>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>10</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><div><span class="mono idx">10 — Your checklist</span><h2 class="display">What we need<br>from you.</h2></div>
+    <p>These details are needed before the site goes live. Nothing is guessed: until you confirm an item it is either hidden or shown as “To be confirmed”. Reply with answers or fill in and send back.</p></div>
+  <ul class="check">
+    <li><span class="box"></span><b>Project photos <span class="tag">Priority</span></b><div><em>Before, during &amp; after, ideally shot from the same spot.</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Logo check</b><div><em>Does the redrawn BR mark look right? Send the original vector file (SVG, AI, EPS) if you have one.</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Phone number</b><div><em>Currently (615) 000-0000</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Email address</b><div><em>Where quote requests should go</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Website domain</b><div><em>e.g. botwinrenovations.com</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Business hours</b><div><em>Currently Mon–Fri 7am–5pm</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Service area</b><div><em>Nashville confirmed? Which nearby cities?</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Services offered</b><div><em>Remove any of the 10 you don’t do</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Years in business</b><div><em>Exact number only</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Projects completed</b><div><em>Exact or “100+” style, if accurate</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>License number</b><div><em>If applicable</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Insurance</b><div><em>e.g. general liability, workers’ comp</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Warranty</b><div><em>Workmanship warranty terms, if any</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Client reviews</b><div><em>Google/Facebook links or text, with permission</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Project details</b><div><em>Neighbourhood, scope, duration per project</em><div class="line"></div></div></li>
+    <li><span class="box"></span><b>Social profiles</b><div><em>Instagram, Google Business, Houzz…</em><div class="line"></div></div></li>
+  </ul>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>11</span></div>
+</section>
+
+<section class="page dark">
+  <div class="head"><div><span class="mono idx">11 — Next steps</span><h2 class="display">Build something<br>better.</h2></div>
+    <p>Once we have your feedback and the details on the checklist, the site can go live quickly.</p></div>
+  <div class="body">
+    <div class="steps">
+      <div><span class="n">01</span><b>Review</b><p>Look through this draft and note anything you’d like changed: wording, services, layout, tone.</p></div>
+      <div><span class="n">02</span><b>Send details</b><p>Send project photos and checklist answers. Photos from a phone are fine.</p></div>
+      <div><span class="n">03</span><b>Final build</b><p>We add your real content and photos, then send a final preview to approve.</p></div>
+      <div><span class="n">04</span><b>Launch</b><p>Connect your domain, switch on form notifications and submit the site to Google.</p></div>
+    </div>
+    <p class="mono" style="margin-top:.6in;color:var(--concrete)">Questions or feedback? Just reply to the email this came with.</p>
+  </div>
+  <div class="foot mono"><span>Botwin Renovations — Website draft</span><span>12</span></div>
+</section>
+
+</body>
+</html>

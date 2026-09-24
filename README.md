@@ -20,7 +20,6 @@ Requires Node 18+.
 
 | What | Where | Status |
 |---|---|---|
-| **Official logo** | `site.config.js → company.logoSrc` | Not received. A geometric "B" stand-in mark is used; drop the real SVG into `assets/img/` and set `logoSrc`. Then run `node scripts/generate-raster.js` (with `npm start` running) to regenerate the favicons and share image. |
 | Domain | `company.siteUrl` | Placeholder `botwinrenovations.com` |
 | Phone | `contact.phoneDisplay` / `phoneE164` | Placeholder `(615) 000-0000` |
 | Email | `contact.email` | Placeholder |
@@ -32,6 +31,10 @@ Requires Node 18+.
 | Reviews | `reviews` | Empty → honest "reviews coming soon" state. Add **real** reviews only, verbatim. |
 | Project photos | `projects[].images` | Illustrative renderings (labelled as such). Replace with real photos. |
 | "Why choose us" claims | `build.js → WHY` | Generic commitments; edit to match how you actually work |
+
+## Logo
+
+The official "BR" logo is built in as vector artwork in `scripts/logo.js`. It was traced from `brand/botwin-logo-original.jpg` and matches it to within edge anti-aliasing. Every placement uses it: header, footer, menu, background marks, favicon and share image. If the logo ever changes, update `scripts/logo.js`, then run `node scripts/generate-raster.js` (with `npm start` running) to regenerate the favicons, PNG logo and share image.
 
 ## Editing content
 
@@ -98,6 +101,6 @@ After launch: submit `https://<domain>/sitemap.xml` in Google Search Console, an
 
 - **Palette:** Jet `#050505`, Near-black `#111`, Charcoal `#1B1B1B`, Warm off-white `#F5F4F0`, White, Concrete `#A5A5A5`, Steel `#5C5D59`. No brand colour beyond black/white/grey; warmth comes from imagery only.
 - **Type:** Archivo 900 (condensed via its width axis) for headlines, Manrope for body text, IBM Plex Mono for technical labels.
-- **Logo-derived geometry:** 45° chamfered corners on images, buttons and the slider handle; thick "beam" dividers; oversized cropped mark in the hero, About, footer and mobile menu backgrounds.
+- **Logo-derived geometry:** the BR mark's angled cuts echoed as chamfered corners on images, buttons and the slider handle; its base bar echoed as thick "beam" dividers; oversized cropped mark in the hero, About, footer and mobile menu backgrounds.
 - **Motion:** restrained. Scroll-driven hero wipe, mask reveals, word-by-word statement, timeline fill, cross-document view transitions. All disabled under `prefers-reduced-motion`.
 - **Accessibility:** skip link, visible focus states, labelled fields with inline errors, keyboard-operable sliders/tabs/menu with a focus trap, WCAG AA contrast (axe-core clean).
