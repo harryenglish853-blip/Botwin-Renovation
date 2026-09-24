@@ -1,0 +1,16 @@
+{
+  "name": "botwin-renovations-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Botwin Renovations LLC \u2014 renovation & remodeling.",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node build.js && node server.js",
+    "serve": "node server.js",
+    "images": "node scripts/optimize-images.mjs",
+    "test": "node build.js && node scripts/check.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
