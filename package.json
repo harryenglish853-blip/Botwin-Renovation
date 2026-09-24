@@ -8,7 +8,8 @@
     "start": "node build.js && node server.js",
     "serve": "node server.js",
     "images": "node scripts/optimize-images.mjs",
-    "test": "node build.js && node scripts/check.js"
+    "test": "node build.js && node scripts/check.js",
+    "preview-file": "node build.js && node scripts/build-preview.js"
   },
   "engines": {
     "node": ">=18"
